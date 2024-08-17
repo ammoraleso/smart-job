@@ -1,0 +1,12 @@
+co\com\andres\service\UserServiceImpl.class
+co\com\andres\domain\Phone.class
+co\com\andres\domain\User.class
+co\com\andres\config\ModelMapperConfig.class
+co\com\andres\web\PingController.class
+co\com\andres\repository\UsersRepository.class
+co\com\andres\dto\UserDTO.class
+co\com\andres\web\UserController.class
+co\com\andres\Main.class
+co\com\andres\service\UserService.class
+co\com\andres\dto\PhoneDTO.class
+co\com\andres\repository\PhoneRepository.class
