@@ -38,7 +38,7 @@ spring.datasource.password=admin
 ## Documentacion Swagger
 
 Se pueden ver los endpoints construidos en esta api en la siguiente URL:
-http://localhost:8080/swagger-ui/index.html#/
+http://localhost:8080/doc/swagger-ui/index.html
 
 ## Postman collection
 Into the resource folder you can download the full collection to test the api using Postman.
