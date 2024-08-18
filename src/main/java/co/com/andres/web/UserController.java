@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,8 +74,17 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}")
-    ResponseEntity<?> updateUser(@RequestBody UserDTO userToUpdate, @PathVariable Long userId) {
+    ResponseEntity<?> updateUser(@Valid @RequestBody UserDTO userToUpdate, @PathVariable Long userId, BindingResult result) {
         try {
+            if (result.hasErrors()) {
+                Map<String, String> errors = new HashMap<>();
+                result.getFieldErrors().forEach(fieldError -> {
+                    String fieldName = fieldError.getField();
+                    String errorMessage = fieldError.getDefaultMessage();
+                    errors.put(fieldName, errorMessage);
+                });
+                return ResponseEntity.badRequest().body(errors);
+            }
             userToUpdate.setId(userId);
             UserDTO updatedUser = userService.update(userToUpdate);
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(updatedUser);
@@ -105,7 +115,7 @@ public class UserController {
         }
     }
 
-    @PatchMapping("/{userId}/delete")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<Void> softDeleteProduct(@PathVariable Long userId) {
         userService.softDeleteProduct(userId);
         return ResponseEntity.noContent().build();

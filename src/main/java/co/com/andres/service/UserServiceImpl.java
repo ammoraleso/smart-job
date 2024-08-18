@@ -6,6 +6,7 @@ import co.com.andres.dto.UserDTO;
 import co.com.andres.repository.PhoneRepository;
 import co.com.andres.repository.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.Data;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Data
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -82,7 +84,9 @@ public class UserServiceImpl implements UserService {
         if(userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail());
         }
-
+        if(userDTO.getPassword() != null) {
+            user.setPassword(userDTO.getPassword());
+        }
         user.setUpdatedAt(new Date());
         user = usersRepository.save((user));
         return modelMapper.map(user, UserDTO.class);

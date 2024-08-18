@@ -10,7 +10,6 @@ import java.util.List;
 
 @Data
 public class UserDTO {
-    @JsonIgnore
     private Long id;
 
     @NotNull(message = "El campo 'name' es obligatorio")
@@ -28,4 +27,5 @@ public class UserDTO {
     private Date createdAt;
     private Date updatedAt;
     private Boolean active;
+    private Date lastLogin;
 }

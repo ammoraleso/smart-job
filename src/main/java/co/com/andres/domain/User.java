@@ -25,10 +25,12 @@ public class User {
     private Date createdAt;
     private Date updatedAt;
     private Boolean active;
+    private Date lastLogin;
 
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+        lastLogin = createdAt;
         active = true;
     }
 }
